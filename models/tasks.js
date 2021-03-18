@@ -18,7 +18,12 @@ async function readTasks (listId) {
   const query = 'SELECT * FROM tasks WHERE listId = $1 ORDER BY isComplete, priority DESC, deadline ASC'
   return await poolQuery(query, [listId])
 }
+async function readTasksTitles (listId) {
+  const query = 'SELECT title FROM tasks WHERE listId = $1 AND isComplete = false ORDER BY priority DESC, deadline ASC LIMIT 10'
+  return await poolQuery(query, [listId])
+}
 
 module.exports = {
-  readTasks
+  readTasks,
+  readTasksTitles
 }

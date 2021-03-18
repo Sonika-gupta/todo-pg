@@ -2,7 +2,6 @@ const db = require('../models/lists')
 
 async function getAllLists (req, res) {
   const [error, result] = await db.readLists()
-  // console.log('controller', result)
   if (result) res.send(result)
   else {
     console.log(error)
@@ -10,6 +9,27 @@ async function getAllLists (req, res) {
   }
 }
 
+async function createList (req, res) {
+  const [error, result] = await db.createList(req.body.name)
+  console.log(result)
+  if (result) res.send(result[0])
+  else {
+    console.log(error)
+    res.send({ error, message: 'Create List Failed' })
+  }
+}
+
+async function deleteLists (req, res) {
+  const [error, result] = await db.deleteLists(req.body.ids)
+  console.log(result)
+  if (result) res.send(result)
+  else {
+    console.log(error)
+    res.send({ error, message: 'Delete List Failed' })
+  }
+}
 module.exports = {
-  getAllLists
+  getAllLists,
+  createList,
+  deleteLists
 }
