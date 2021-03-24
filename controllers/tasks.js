@@ -18,7 +18,17 @@ async function getTasksTitles (req, res) {
   }
 }
 
+async function createTask (req, res) {
+  const [error, result] = await db.createTask(req.body)
+  if (result) res.send(result[0])
+  else {
+    console.log(error)
+    res.send({ error, message: 'Create Tasks Failed' })
+  }
+}
+
 module.exports = {
   getAllTasks,
-  getTasksTitles
+  getTasksTitles,
+  createTask
 }
