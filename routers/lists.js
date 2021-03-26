@@ -1,10 +1,10 @@
-const listController = require('../controllers/lists')
+const { listController: controller } = require('../controllers')
 const router = require('express').Router()
 
-router.get('/', listController.getAllLists)
-router.post('/', listController.createList)
-router.delete('/', listController.deleteLists)
-router.put('/', listController.updateList)
-router.get('/:id', listController.getListById)
+router.get('/', controller.getAllLists)
+router.post('/', controller.createList)
+router.delete('/', controller.deleteLists)
+router.put('/', controller.updateList)
+router.get('/:id', controller.getListById)
 
 module.exports = router

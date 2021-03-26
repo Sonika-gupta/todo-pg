@@ -48,6 +48,7 @@ async function deleteLists (ids) {
   const query = 'DELETE FROM lists WHERE id = ANY ($1) RETURNING id'
   return await poolQuery(query, [ids])
 }
+
 module.exports = {
   createList,
   readLists,

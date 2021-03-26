@@ -1,4 +1,4 @@
-const db = require('../models/lists')
+const { listModel: db } = require('../models')
 
 async function getAllLists (req, res) {
   const [error, result] = await db.readLists()
@@ -48,6 +48,7 @@ async function deleteLists (req, res) {
     res.send({ error, message: 'Delete Lists Failed' })
   }
 }
+
 module.exports = {
   getAllLists,
   getListById,
