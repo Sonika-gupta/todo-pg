@@ -49,10 +49,21 @@ async function deleteLists (req, res) {
   }
 }
 
+async function clearCompleted (req, res) {
+  const [error, result] = await db.clearCompleted(req.body.id)
+  console.log(result)
+  if (result) res.send(result)
+  else {
+    console.log(error)
+    res.send({ error, message: 'Clear Completed Failed' })
+  }
+}
+
 module.exports = {
   getAllLists,
   getListById,
   createList,
   updateList,
-  deleteLists
+  deleteLists,
+  clearCompleted
 }

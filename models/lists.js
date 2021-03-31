@@ -16,7 +16,7 @@ async function poolQuery (query, values) {
 }
 
 async function readLists () {
-  const query = 'SELECT * FROM lists'
+  const query = 'SELECT * FROM lists ORDER BY id'
   return await poolQuery(query)
 }
 
@@ -49,10 +49,17 @@ async function deleteLists (ids) {
   return await poolQuery(query, [ids])
 }
 
+async function clearCompleted (id) {
+  let query = 'DELETE FROM tasks WHERE isComplete = true'
+  if (id) query += ' AND listId = $1'
+  return await poolQuery(query, [id])
+}
+
 module.exports = {
   createList,
   readLists,
   readListById,
   updateList,
-  deleteLists
+  deleteLists,
+  clearCompleted
 }
